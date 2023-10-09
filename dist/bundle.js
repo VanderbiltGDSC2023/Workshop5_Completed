@@ -14,9 +14,9 @@
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n// Import the functions you need from the SDKs you need\r\n\r\n\r\n\r\n// Your web app's Firebase configuration\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyCOdvX-iWDhXiSf9UU0sAHzIcup0OR0-hQ\",\r\n  authDomain: \"workshop5-d2900.firebaseapp.com\",\r\n  projectId: \"workshop5-d2900\",\r\n  storageBucket: \"workshop5-d2900.appspot.com\",\r\n  messagingSenderId: \"1051380990442\",\r\n  appId: \"1:1051380990442:web:4865c90dae99e58a5f7293\",\r\n};\r\n\r\n// Initialize Firebase\r\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\r\n\r\n//collection ref\r\nconst colRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'people')\r\n\r\nawait (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, 'people', \"Franklin2\"), {\r\n    month: 4,\r\n    day: 15,\r\n    year: 2004\r\n});\r\n\r\n//add a person\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://workshop5/./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n// Import the functions you need from the SDKs you need\r\n\r\n\r\n\r\n// Your web app's Firebase configuration\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyCOdvX-iWDhXiSf9UU0sAHzIcup0OR0-hQ\",\r\n  authDomain: \"workshop5-d2900.firebaseapp.com\",\r\n  projectId: \"workshop5-d2900\",\r\n  storageBucket: \"workshop5-d2900.appspot.com\",\r\n  messagingSenderId: \"1051380990442\",\r\n  appId: \"1:1051380990442:web:4865c90dae99e58a5f7293\",\r\n};\r\n\r\n// Initialize Firebase\r\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\r\n\r\n//add a person\r\nconst submitButton = document.querySelector(\"button\");\r\n\r\nsubmitButton.addEventListener('click', async ()=> {\r\n\r\n    const name = document.getElementById(\"name\").value;\r\n    const month = document.getElementById(\"month\").value.toLowerCase();\r\n    const day = document.getElementById(\"day\").value;\r\n    const year = document.getElementById(\"year\").value;\r\n\r\n    document.getElementById('form').reset();\r\n\r\n    await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, 'people', name), {\r\n        month: month,\r\n        day: day,\r\n        year: year\r\n    })\r\n\r\n\r\n    updateMonth(month);\r\n})\r\n\r\nasync function updateMonth(month) {\r\n    const colRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'people');\r\n\r\n    const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(colRef, (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('month', '==', month));\r\n\r\n    try {\r\n        const querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);\r\n        const box = document.getElementById(`${month}`);\r\n        box.innerHTML ='';\r\n\r\n        querySnapshot.forEach((doc)=> {\r\n\r\n            const monthName = month.charAt(0).toUpperCase() + month.slice(1);\r\n            if(box) {\r\n                const element = document.createElement('div');\r\n                element.textContent = doc.id + ' ' + monthName + ' ' + doc.data().day + ', ' + doc.data().year;\r\n                box.appendChild(element);\r\n            }\r\n        })\r\n    } catch (error) {\r\n        console.error('Error fetching data', error);\r\n    }\r\n}\r\n\r\ndocument.getElementById('delete-button').addEventListener('click', async ()=> {\r\n    console.log(\"bye\");\r\n    const name = document.getElementById('delete-field').value;\r\n    const itemRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, 'people', name);\r\n    \r\n    try {\r\n        const itemDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)(itemRef);\r\n\r\n        const month = itemDoc.data().month;\r\n\r\n        await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(itemRef);\r\n        document.getElementById('delete-form').reset();\r\n        updateMonth(month);\r\n\r\n    } catch (error) {\r\n        console.error('error deleting document: ', error);\r\n    }\r\n})\r\n\r\nupdateMonth('january');\r\nupdateMonth('february');\r\nupdateMonth('march');\r\nupdateMonth('april');\r\nupdateMonth('may');\r\nupdateMonth('june');\r\nupdateMonth('july');\r\nupdateMonth('august');\r\nupdateMonth('september');\r\nupdateMonth('october');\r\nupdateMonth('november')\r\nupdateMonth('december');\n\n//# sourceURL=webpack://workshop5/./index.js?");
 
 /***/ }),
 
@@ -147,75 +147,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

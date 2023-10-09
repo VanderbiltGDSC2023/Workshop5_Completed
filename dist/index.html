@@ -11,59 +11,73 @@
         <h3>Enter your friend's birthday information below, then press submit!</h3>    
     </div>
     
-    <div class="grid-input">
+    <form id="form" class="grid-input">
         <input class="input" type = "text" id="name" placeholder="Enter your friend's name: ">
         <input class="input" type = "text" id="month" placeholder="Enter your friend's birth month: ">
         <input class="input" type = "text" id="day" placeholder="Enter your friend's birth day: ">
         <input class="input" type = "text" id="year" placeholder="Enter your friend's birth year: ">
-    </div>
-    
+    </form>
+
     <div class = "button"> 
         <button id = "submit">Submit</button> 
     </div>
 
     <div class="grid-container">
         <div class="box" style ="background-color: #ACFCD9">
-            <h4>January</h4>
+            <h4 class = "month-name">January</h4>
+            <div id="january"></div>
         </div>
         <div class="box" style ="background-color: #ffd5ff">
-            <h4 >February</h4>
+            <h4 class = "month-name">February</h4>
+            <div id="february"></div>
         </div>
         <div class="box" style ="background-color: #7d5ba6">
-            <h4>March</h4>
+            <h4 class = "month-name">March</h4>
+            <div id="march"></div>
         </div>
         <div class="box" style ="background-color: #f4c095">
-            <h4>April</h4>
+            <h4 class = "month-name">April</h4>
+            <div id="april"></div>
         </div>
         <div class="box" style ="background-color: #cbef43">
-            <h4>May</h4>
+            <h4 class = "month-name">May</h4>
+            <div id="may"></div>
         </div>
         <div class="box" style ="background-color: #51a3a3">
-            <h4>June</h4>
+            <h4 class = "month-name">June</h4>
+            <div id="june"></div>
         </div>
         <div class="box" style ="background-color: #5c6bec">
-            <h4>July</h4>
+            <h4 class = "month-name">July</h4>
+            <div id="july"></div>
         </div>
         <div class="box" style ="background-color: #ff0000">
-            <h4>August</h4>
+            <h4 class = "month-name">August</h4>
+            <div id="august"></div>
         </div>
         <div class="box" style ="background-color: #3f68cf">
-            <h4>September</h4>
+            <h4 class = "month-name">September</h4>
+            <div id="september"></div>
         </div>
         <div class="box" style ="background-color: #eca409">
-            <h4>October</h4>
+            <h4 class = "month-name">October</h4>
+            <div id="october"></div>
         </div>
         <div class="box" style ="background-color: #c9ae6b">
-            <h4>November</h4>
+            <h4 class = "month-name">November</h4>
+            <div id="november"></div>
         </div>
         <div class="box" style ="background-color: #f13535">
-            <h4>December</h4>
+            <h4 class = "month-name">December</h4>
+            <div id="december"></div>
         </div>
     </div>
 
     <div class = "delete">
         <h3 class = "delete-item">Delete birthday</h3>
-        <input class = "delete-item input" type = "text" id="delete-field" placeholder="Enter name to delete">
+        <form class ="delete-item" id="delete-form">
+            <input class = "input" type = "text" id="delete-field" placeholder="Enter name to delete">
+        </form>
         <button class = "delete-item" id = "delete-button">Delete Entry</button>
     </div>
     
